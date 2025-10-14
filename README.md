@@ -1,6 +1,9 @@
 # PDFExtend-docker
 
-PDFExtend is a simple tool developed by @DorianRudolph that adds margins to PDF files, giving you extra space to write or draw notes when using PDF annotation apps.
+This repository is a Dockerized build wrapper for the original PDFExtend project by @DorianRudolph.
+Original project: https://github.com/DorianRudolph/pdfextend
+
+The goal of this repository is to automatically build and publish a Docker image on Docker Hub so PDFExtend can be self-hosted and accessed easily via a web server.
 
 ## Docker-CLI
 ```
@@ -19,3 +22,7 @@ services:
         container_name: pdfextend
         image: shahram7/pdfextend:latest
 ```
+
+## Credits
+All credit for PDFExtend goes to **@DorianRudolph**.  
+This repository only provides a Docker image and CI/CD automation for convenient deployment.
