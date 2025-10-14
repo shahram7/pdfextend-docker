@@ -1,16 +1,13 @@
-name: Build and Push Docker Image
+name: Build and Push Docker Image to Docker Hub
 
 on:
   schedule:
-    - cron: "0 0 * * 0" # Once per week, Sunday at midnight UTC
-  workflow_dispatch: # Manual trigger if needed
+    - cron: "0 0 * * 0" 
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
       - name: Checkout wrapper repo
@@ -20,11 +17,11 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}          
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ghcr.io/shahram7/pdfextend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/pdfextend:latest
