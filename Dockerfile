@@ -14,7 +14,8 @@ WORKDIR /src/pdfextend-web
 # Build wasm
 RUN wasm-pack build --target no-modules \
  && cp pkg/pdfextend_web.js ../webapp/public \
- && cp pkg/pdfextend_web_bg.wasm ../webapp/public
+ && cp pkg/pdfextend_web_bg.wasm ../webapp/public \
+ && cp pkg/pdfium.js ../webapp/public || true
 
 # Build frontend
 WORKDIR /src/webapp
