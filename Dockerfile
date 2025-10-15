@@ -3,7 +3,7 @@ FROM node:20-slim AS webapp-builder
 # Install dependencies needed for both web and PDFium
 RUN apt update && apt install -y \
     git curl wget build-essential pkg-config libssl-dev \
-    python3 python3-pip clang cmake ninja
+    python3 python3-pip clang cmake ninja-build
 
 # Install Rust & wasm-pack
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
