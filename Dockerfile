@@ -18,10 +18,11 @@ WORKDIR /src/pdfextend-web
 RUN wasm-pack build --target no-modules \
  && cp -r pkg/* ../webapp/public
 
-# Now build or download PDFium
+# Download pdfium.js + wasm from pdfium.js repo
 WORKDIR /src
-RUN git clone https://pdfium.googlesource.com/pdfium.git pdfium
-WORKDIR /src/pdfium
+RUN wget -qO pdfium-js.zip https://github.com/Jaewoook/pdfium.js/archive/refs/heads/main.zip \
+    && unzip pdfium-js.zip \
+    && cp pdfium.js-main/dist/pdfium.js pdfium.js-main/dist/pdfium.wasm /src/webapp/public || true
 
 # Install build deps (Ubuntu Debian)
 RUN ./build/install-build-deps.sh
