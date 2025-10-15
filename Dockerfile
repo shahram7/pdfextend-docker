@@ -18,11 +18,11 @@ RUN wasm-pack build --target no-modules \
  && mkdir -p ../webapp/public \
  && cp -r pkg/* ../webapp/public
 
-# Download pdfium.js + wasm from pdfium.js repo (prebuilt)
-WORKDIR /src
-RUN wget -qO pdfium-js.zip https://github.com/Jaewoook/pdfium.js/archive/refs/heads/main.zip \
-    && unzip pdfium-js.zip \
-    && cp pdfium.js-main/dist/pdfium.js pdfium.js-main/dist/pdfium.wasm /src/webapp/public
+# Download prebuilt PDFium WASM bundle
+WORKDIR /src/webapp/public
+RUN wget -q https://github.com/bblanchon/pdfium-binaries/releases/latest/download/pdfium-wasm.tgz \
+    && tar -xzf pdfium-wasm.tgz --strip-components=1 \
+    && rm pdfium-wasm.tgz
 
 # Build frontend
 WORKDIR /src/webapp
