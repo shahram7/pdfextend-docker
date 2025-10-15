@@ -24,18 +24,6 @@ RUN wget -qO pdfium-js.zip https://github.com/Jaewoook/pdfium.js/archive/refs/he
     && unzip pdfium-js.zip \
     && cp pdfium.js-main/dist/pdfium.js pdfium.js-main/dist/pdfium.wasm /src/webapp/public || true
 
-# Install build deps (Ubuntu Debian)
-RUN ./build/install-build-deps.sh
-
-# Generate build files with GN
-RUN gn gen out/Release
-
-# Build all PDFium libraries / js interface (if exists)
-RUN ninja -C out/Release pdfium_all
-
-# After build, find the output binary (e.g. pdfium.js or libpdfium.so) and copy to webapp/public
-RUN cp out/Release/path/to/pdfium.js /src/webapp/public || true
-
 # Build frontend
 WORKDIR /src/webapp
 RUN npm install && npm run build
