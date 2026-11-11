@@ -1,0 +1,7 @@
+services:
+  pdfextend:
+    image: shahram7/pdfextend:latest
+    container_name: pdfextend
+    ports:
+      - "1080:80"
+    restart: unless-stopped
